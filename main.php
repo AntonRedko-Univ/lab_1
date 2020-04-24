@@ -1,8 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Авторизация пользователя</title>
 </head>
 <body>
@@ -15,36 +12,37 @@ $usinfo = array(array('login' => 'BarATrum009', 'password' => 'cominthrough', 'n
                 array('login' => 'imabest', 'password' => 'bestmanager', 'name' => 'Иван', 'surname' => 'Иванов', 'role' => 'manager'));
 
 class user {
+    public $login;
+    public $password;
     public $name;
     public $surname;
     public $role;
-    public $login;
-    public $password;
-    function __construct($name,$surname,$role,$login,$password)
+
+    function __construct($login,$password,$name,$surname,$role)
     {
-        $this->name = $name;
-        $this->surname = $surname;
-        $this->role = $role;
-        $this->login = $login;
-        $this->password = $password;
+        $this->name = $login;
+        $this->surname = $password;
+        $this->role = $name;
+        $this->login = $surname;
+        $this->password = $role;
     }
 }
 class admin extends user {
 
     public function introduce (){
-        echo "Здравствуйте, ".$this->role. "  " . $this->name. "  " . $this->surname. "  ". ", вам разрешено все на данном сайте";
+        echo "Здравствуйте, " . $this->name. "  " . $this->surname. "  ". ", поскольку Вы админ, Вы можете всё на этом сайте";
     }
 };
 class manager extends user {
 
     public function introduce() {
-        echo "Здравствуйте, ".$this->role. "  " . $this->name. "  " . $this->surname. "  ". ", вам разрешено редактировать и удалять пользователей с аккаунтами клиентов";
+        echo "Здравствуйте, " . $this->name. "  " . $this->surname. "  ". ", вам разрешено редактировать и удалять пользователей с аккаунтами статус у которых - клиент";
     }
 };
 class client extends user {
 
     public function introduce (){
-        echo "Здравствуйте ,".$this->role. "  " . $this->name. "  " . $this->surname. "  ". ", добро пожаловать на сайт!";;
+        echo "Здравствуйте, " . $this->name. "  " . $this->surname. "  ". ", добро пожаловать!";;
     }
 }
 
@@ -62,4 +60,5 @@ switch ($log) {
         $client->introduce();
         break;
 }
-
+    ?>
+    </html>
