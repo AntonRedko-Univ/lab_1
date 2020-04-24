@@ -11,6 +11,10 @@ $usinfo = array(array('login' => 'BarATrum009', 'password' => 'cominthrough', 'n
                 array('login' => 'Dotyev007', 'password' => 'H@5ley', 'name' => 'Афанасий', 'surname' => 'Авдотьев', 'role' => 'client'),
                 array('login' => 'imabest', 'password' => 'bestmanager', 'name' => 'Иван', 'surname' => 'Иванов', 'role' => 'manager'));
 
+if (!($log == $usinfo[0]['login']) || !($log == $usinfo[1]['login']) || !($log == $usinfo[2]['login'])){
+    header('location: login.php');
+}
+
 class user {
     public $login;
     public $password;
@@ -60,5 +64,5 @@ switch ($log) {
         $client->introduce();
         break;
 }
-    ?>
-    </html>
+?>
+</html>
