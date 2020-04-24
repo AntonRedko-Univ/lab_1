@@ -1,82 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация пользователя</title>
+</head>
+<body>
 <?php
-    $password = $_POST["password"];
-    $login = $_POST["login"];
+$log = $_POST["login"];
+$pass = $_POST["password"];
 
-    class User
-    {
-        public $login;
-        public $password;
-        public $name;
-        public $surname;
-        public $role;
-    }
+$usinfo = array(array('login' => 'BarATrum009', 'password' => 'cominthrough', 'name' => 'Ада', 'surname' => 'Байрон', 'role' => 'admin'),
+                array('login' => 'Dotyev007', 'password' => 'H@5ley', 'name' => 'Афанасий', 'surname' => 'Авдотьев', 'role' => 'client'),
+                array('login' => 'imabest', 'password' => 'bestmanager', 'name' => 'Иван', 'surname' => 'Иванов', 'role' => 'manager'));
 
-class Admin extends User
-{
-    function  __construct()
+class user {
+    public $name;
+    public $surname;
+    public $role;
+    public $login;
+    public $password;
+    function __construct($name,$surname,$role,$login,$password)
     {
-        $this->pass = "cominthrough";
-        $this->log = "BarATrum009";
-        $this->role = "Админ";
-        $this->name = "Ада";
-        $this->surname = "Байрон";
-    }
-
-    public function printInfo()
-    {
-        echo "Здравствуйте " . $this->role . " " . $this->name . " " . $this->surname . " " . "Вы можете на сайте делать всё";
+        $this->name = $name;
+        $this->surname = $surname;
+        $this->role = $role;
+        $this->login = $login;
+        $this->password = $password;
     }
 }
-class Client extends User
-{
-    function  __construct()
-    {
-        $this->pass = "H@5ley";
-        $this->log = "Dotyev007";
-        $this->role = "Клиент";
-        $this->name = "Афанасий";
-        $this->surname = "Авдотьев";
-    }
+class admin extends user {
 
-    public function printInfo()
-    {
-        echo "Здравствуйте " . $this->role . " " . $this->name . " " . $this->surname . " " . "Вы можете на сайте просматривать информацию доступную пользователям";
+    public function introduce (){
+        echo "Здравствуйте, ".$this->role. "  " . $this->name. "  " . $this->surname. "  ". ", вам разрешено все на данном сайте";
     }
-}
-class Manager extends User
-{
-    function  __construct()
-    {
-        $this->pass = "bestmanager";
-        $this->log = "imabest";
-        $this->role = "Мененджер";
-        $this->name = "Иван";
-        $this->surname = "Иванов";
-    }
+};
+class manager extends user {
 
-    public function printInfo()
-    {
-        echo "Здравствуйте " . $this->role . " " . $this->name . " " . $this->surname . " " . "Вы можете на сайте изменять, удалять и создавать клиентов";
+    public function introduce() {
+        echo "Здравствуйте, ".$this->role. "  " . $this->name. "  " . $this->surname. "  ". ", вам разрешено редактировать и удалять пользователей с аккаунтами клиентов";
+    }
+};
+class client extends user {
+
+    public function introduce (){
+        echo "Здравствуйте ,".$this->role. "  " . $this->name. "  " . $this->surname. "  ". ", добро пожаловать на сайт!";;
     }
 }
-if ($login == 'BarATrum009' and $password == 'cominthrough')
-{
-    $admin = new Admin();
-    $admin ->printInfo();
-}else if ($login == 'imabest' and $password == 'bestmanager')
-{
-    $manager = new Manager();
-    $manager ->printInfo();
-}else if ($login == 'Dotyev007' and $password == 'H@5ley')
-{
-    $client = new Client();
-    $client ->printInfo();
-}else
-{
-    echo 'Неверный логин или пароль';
+
+switch ($log) {
+    case "BarATrum009";
+        $admin = new admin($usinfo[0]["name"], $usinfo[0]["surname"], $usinfo[0]["role"], $usinfo[0]["login"], $usinfo[0]["password"]);
+        $admin->introduce();
+        break;
+    case "imabest";
+        $manager = new manager($usinfo[2]["name"], $usinfo[2]["surname"], $usinfo[2]["role"], $usinfo[2]["login"], $usinfo[2]["password"]);
+        $manager->introduce();
+        break;
+    case "Dotyev007";
+        $client = new client($usinfo[1]["name"], $usinfo[1]["surname"], $usinfo[1]["role"], $usinfo[1]["login"], $usinfo[1]["password"]);
+        $client->introduce();
+        break;
 }
-?>
-<br/>
-<form action = "Login.php" method = "post">
-    <input type="submit" name="send" value="Back" class="button">
-</form>
+
