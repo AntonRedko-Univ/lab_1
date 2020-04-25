@@ -36,13 +36,13 @@ class admin extends user {
     public function introduce (){
         echo "Здравствуйте, " . $this->name. "  " . $this->surname. "  ". ", поскольку Вы админ, Вы можете всё на этом сайте";
     }
-};
+}
 class manager extends user {
 
     public function introduce() {
         echo "Здравствуйте, " . $this->name. "  " . $this->surname. "  ". ", вам разрешено редактировать и удалять пользователей с аккаунтами статус у которых - клиент";
     }
-};
+}
 class client extends user {
 
     public function introduce (){
