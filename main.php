@@ -24,11 +24,11 @@ class user {
 
     function __construct($login,$password,$name,$surname,$role)
     {
-        $this->name = $login;
-        $this->surname = $password;
-        $this->role = $name;
-        $this->login = $surname;
-        $this->password = $role;
+        $this->login = $login;
+        $this->password = $password;
+        $this->name = $name;
+        $this->surname = $surname;
+        $this->role = $role;
     }
 }
 class admin extends user {
